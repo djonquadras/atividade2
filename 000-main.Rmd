@@ -102,37 +102,25 @@ toc: false
 \clearpage
 
 \pagestyle{plain}
-```{r echo=FALSE, child="007-questao111.Rmd"}
+```{r echo=FALSE, child="007-questao113.Rmd"}
 ```
 
 \clearpage
 
 \pagestyle{plain}
-```{r echo=FALSE, child="008-questao112.Rmd"}
+```{r echo=FALSE, child="008-questao114.Rmd"}
 ```
 
 \clearpage
 
 \pagestyle{plain}
-```{r echo=FALSE, child="009-questao113.Rmd"}
+```{r echo=FALSE, child="009-questao115.Rmd"}
 ```
 
 \clearpage
 
 \pagestyle{plain}
-```{r echo=FALSE, child="010-questao114.Rmd"}
-```
-
-\clearpage
-
-\pagestyle{plain}
-```{r echo=FALSE, child="011-questao115.Rmd"}
-```
-
-\clearpage
-
-\pagestyle{plain}
-```{r echo=FALSE, child="012-questao116.Rmd"}
+```{r echo=FALSE, child="010-questao116.Rmd"}
 ```
 
 \clearpage
