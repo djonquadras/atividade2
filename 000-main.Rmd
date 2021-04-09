@@ -8,8 +8,8 @@ params:
   orientador: "Renato Lucas Pacheco"
   titulo: "Trabalho 2"
   cidade: "Florianópolis"
-  modelo: "2"
-  ano: "2020"
+  modelo: "4"
+  ano: "2021"
 number_sections: true
 header-includes:
   - \usepackage{indentfirst} # Indenta o primeiro parágrafo de cada seção.

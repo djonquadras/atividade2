@@ -4,7 +4,19 @@
 
 ## Enunciado {-}
 
-Working on it :)
+```{r, echo=FALSE, include=FALSE}
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados <- selecionaDados(questao108, params$modelo)
+```
+
+Um transformador trifásico abaixador de `r dados$S` VA, `r dados$V1`/`r dados$V2` V, `r dados$f` Hz, ligado em $Y$/$\Delta$ foi submetido a um ensaio de curto-circuito realizado pelo lado de baixa tensão (`r dados$V2`V) de onde se obteve a seguinte impedância equivalente, por fase: `r dados$Z` [$\Omega$]. Os seguintes resultados foram obtidos de um ensaio de circuito aberto, realizado pelo lado de baixa tensão, a `r dados$f` Hz: $P_{3\phi}$ = `r dados$P3PHI` W; $I_l$ = `r dados$IL` A; $V_l$ = `r dados$VL` V. O equipamento está alimentando uma carga trifásica equilibrada de `r dados$CARGA`W, com um fator de potência `r dados$FP` adiantado. A tensão na carga foi ajustada para `r dados$V2` V.
+
+Para a sua versão, pede-se:
+
+a. A tensão na fonte, a corrente e a potência aparente fornecidas pela fonte, referidas ao primário (lado 1), e o fator de potência “visto” pela fonte, usando o modelo impedância série;
+b. O rendimento e a regulação do transformador, usando o modelo impedância série. Usar a potência do ensaio a vazio, se realizado com tensão nominal;
+c. Comentar os resultados!
 
 ## Resolução {-}
 

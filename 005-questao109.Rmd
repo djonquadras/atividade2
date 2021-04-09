@@ -4,7 +4,17 @@
 
 ## Enunciado {-}
 
-Working on it :)
+```{r, echo=FALSE, include=FALSE}
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados <- selecionaDados(questao108, params$modelo)
+```
+
+Para a sua versão, no exemplo anterior, ajustando a tensão na entrada do transformador para o seu valor nominal, se o transformador está fornecendo corrente nominal a fator de potência 0,6 capacitivo, pede-se: 
+
+a. A tensão sobre a carga, corrente e a potência aparente fornecidas pela fonte, referidas ao primário (lado 1), e o fator de potência “visto” pela fonte, usando o modelo impedância série;
+b. O rendimento e a regulação do transformador, usando o modelo impedância série. Usar a potência do ensaio a vazio, se realizado com tensão nominal;
+c. Comparar com os resultados do Exemplo 1.8: Transformador trifásico abaixador com tensão especificada na carga. Comentar os resultados!
 
 ## Resolução {-}
 

@@ -4,7 +4,25 @@
 
 ## Enunciado {-}
 
-Working on it :)
+```{r, echo=FALSE, include=FALSE}
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados108 <- selecionaDados(questao108, params$modelo)
+dados110 <- selecionaDados(questao110, params$modelo)
+
+```
+
+Os dois transformadores abaixo são ligados em paralelo para alimentar uma carga trifásica equilibrada.
+
+**TRANSFORMADOR 1:** Um transformador trifásico abaixador de `r dados108$S` VA, `r dados108$V1`/`r dados108$V2` V, `r dados108$f` Hz, ligado em $Y$/$\Delta$ foi submetido a um ensaio de curto-circuito realizado pelo lado de baixa tensão (`r dados108$V2`V) de onde se obteve a seguinte impedância equivalente, por fase: `r dados108$Z` [$\Omega$]. Os seguintes resultados foram obtidos de um ensaio de circuito aberto, realizado pelo lado de baixa tensão, a `r dados108$f` Hz: $P_{3\phi}$ = `r dados108$P3PHI` W; $I_l$ = `r dados108$IL` A; $V_l$ = `r dados108$VL` V.
+
+**TRANSFORMADOR 2:** Um transformador trifásico abaixador de `r dados110$S` VA, `r dados110$V1`/`r dados110$V2` V, `r dados110$f` Hz, ligado em $Y$/$\Delta$ foi submetido a um ensaio de curto-circuito realizado pelo lado de baixa tensão (`r dados110$V2`V) de onde se obteve a seguinte impedância equivalente, por fase: `r dados110$Z` [$\Omega$]. Os seguintes resultados foram obtidos de um ensaio de circuito aberto, realizado pelo lado de alta tensão, a `r dados110$f` Hz: $P_{3\phi}$ = `r dados110$P3PHI` W; $I_l$ = `r dados110$IL` A; $V_l$ = `r dados110$VL` V.
+
+Se o conjunto está alimentando uma carga nominal (tensão e corrente nominais), sob fator de potência $0.6$ capacitivo, pede-se:
+
+a.  A tensão na fonte, a corrente e a potência aparente fornecidas pela fonte e por cada transformador em paralelo, referidas ao primário (lado 1), e o fator de potência “visto” pela fonte e o fator de potência de cada transformador, usando o modelo impedância série;
+b. O rendimento e a regulação de cada transformador;
+c. Comentar os resultados! 
 
 ## Resolução {-}
 
