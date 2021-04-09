@@ -5,9 +5,10 @@
 ## Enunciado {-}
 
 ```{r, echo=FALSE, include=FALSE}
-source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/solution107.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados <- selecionaDados(questao107, params$modelo)
+sol <- solution(dados)
 ```
 
 Transformador de `r dados$S`VA, `r dados$V1`/`r dados$V2`, `r dados$f`Hz. Se três transformadores iguais ao especificado forem ligados na configuração estrela/delta ($Y-\Delta$) e alimentados a partir de um gerador de tensão trifásica equilibrada de sequência positiva, com valor eficaz (de linha) igual a raiz quadrada de três vezes a tensão nominal do lado primário do transformador (lado de alta tensão), qual a tensão entre os terminais abertos (em módulo e ângulo) em cada um dos casos mostrados a seguir? Explicar cuidadosamente os resultados, concluindo se a ligação delta pode ou não ser fechada e por quê!! Para esta análise, os transformadores podem ser considerados ideais! 
@@ -18,23 +19,98 @@ knitr::include_graphics('images/prob17/001.jpg', dpi = NA)
 
 ## Resolução {-}
 
-Working on it :)
+De acordo com o enunciado, o sistema é alimentado por um gerador com tensão eficaz (de linha) de `r sol$Vef`V. Com isso, podemos concluir que as tensões de linha em Y são
 
-<!-- ```{r tab1, echo=FALSE} -->
-<!-- resultados <- data.frame(T1 = c(1,2), -->
-<!--                          T2 = c(1,2), -->
-<!--                          T3 = c(1,2), -->
-<!--                          T4 = c(1,2)) -->
-<!-- colnames(resultados) <- c("Variável", "Modelo T") -->
-<!-- k <- knitr::kable(resultados, booktabs = T, escape = FALSE, caption = "Comparação entre os modelos") -->
-<!-- kableExtra::kable_styling(k, latex_options = "hold_position") -->
-<!-- ``` -->
+$$
+\begin{cases}
+  V_{AB} = `r Mod(sol$VAB)` \angle `r rad2degree(Arg(sol$VAB))`^\circ V \\
+  V_{BC} = `r Mod(sol$VBC)` \angle `r rad2degree(Arg(sol$VBC))`^\circ V \\
+  V_{CA} = `r Mod(sol$VCA)` \angle `r rad2degree(Arg(sol$VCA))`^\circ V \\
+\end{cases}
+$$
+
+E como para sistemas balanceados temos que $V_L = \sqrt{3}V_P$ (com defasamento de $30^\circ$), temos que
+
+$$
+\begin{cases}
+  V_{AN} = `r Mod(sol$VAN)` \angle `r rad2degree(Arg(sol$VAN))`^\circ V \\
+  V_{BN} = `r Mod(sol$VBN)` \angle `r rad2degree(Arg(sol$VBN))`^\circ V \\
+  V_{CN} = `r Mod(sol$VCN)` \angle `r rad2degree(Arg(sol$VCN))`^\circ V \\
+\end{cases}
+$$
 
 
+Dessa forma, é possível calcular as tensões de linha no circuito em $\Delta$. Para cada um dos casos será feita a comparação com base nas marcas de polaridade.
+
+#### Para circuito b1 {-}
+
+Para o circuito apresentado em **b1**, tem-se as seguintes resultados para tensão de linha.
+
+$$
+\begin{cases}
+  V_{ab} = `r Mod(sol$VAB1)` \angle `r rad2degree(Arg(sol$VAB1))`^\circ V \\
+  V_{bc} = `r Mod(sol$VBC1)` \angle `r rad2degree(Arg(sol$VBC1))`^\circ V \\
+  V_{?a} = `r Mod(sol$VA1)` \angle `r rad2degree(Arg(sol$VA1))`^\circ V \\
+\end{cases}
+$$
+
+Com isso, a tensão no terminal aberto é
+
+$$
+V_{c?} = V_{ab} + V_{bc} + V_{?a} \\
+$$
+
+$$
+\boxed{V_{c?} = `r round(Mod(sol$VC1),1)` \angle `r round(rad2degree(Arg(sol$VC1)),1)`^\circ V}
+$$
+
+Como $V_{c?}$ tem magnitude nula, é possível fechar o circuito tranquilamente.
+
+#### Para circuito b2 {-}
+
+Para o circuito apresentado em **b2**, tem-se as seguintes resultados para tensão de linha.
+
+$$
+\begin{cases}
+  V_{ab} = `r Mod(sol$VAB2)` \angle `r rad2degree(Arg(sol$VAB2))`^\circ V \\
+  V_{bc} = `r Mod(sol$VBC2)` \angle `r rad2degree(Arg(sol$VBC2))`^\circ V \\
+  V_{?a} = `r Mod(sol$VA2)` \angle `r rad2degree(Arg(sol$VA2))`^\circ V \\
+\end{cases}
+$$
+
+Com isso, a tensão no terminal aberto é
+
+$$
+V_{c?} = V_{ab} + V_{bc} + V_{?a} \\
+$$
+
+$$
+\boxed{V_{c?} = `r round(Mod(sol$VC2),1)` \angle `r round(rad2degree(Arg(sol$VC2)),1)`^\circ V}
+$$
+
+Como $V_{c?}$ tem magnitude não nula (e, num caso ainda pior, tendo o dobro da tensão de fase), **não é possível fechar o circuito de forma alguma**.
 
 
+#### Para circuito b3 {-}
 
+Para o circuito apresentado em **b3**, tem-se as seguintes resultados para tensão de linha.
 
+$$
+\begin{cases}
+  V_{ab} = `r Mod(sol$VAB3)` \angle `r rad2degree(Arg(sol$VAB3))`^\circ V \\
+  V_{bc} = `r Mod(sol$VBC3)` \angle `r rad2degree(Arg(sol$VBC3))`^\circ V \\
+  V_{?a} = `r Mod(sol$VA3)` \angle `r rad2degree(Arg(sol$VA3))`^\circ V \\
+\end{cases}
+$$
 
+Com isso, a tensão no terminal aberto é
 
+$$
+V_{c?} = V_{ab} + V_{bc} + V_{?a} \\
+$$
 
+$$
+\boxed{V_{c?} = `r round(Mod(sol$VC3),1)` \angle `r round(rad2degree(Arg(sol$VC3)),1)`^\circ V}
+$$
+
+Como $V_{c?}$ tem magnitude não nula (e, num caso ainda pior, tendo o dobro da tensão de fase), **não é possível fechar o circuito de forma alguma**.
