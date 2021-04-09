@@ -5,33 +5,36 @@
 ## Enunciado {-}
 
 ```{r, echo=FALSE, include=FALSE}
-source("equations.R", local = knitr::knit_global())
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados <- selecionaDados(questao17, params$modelo)
 ```
 
+Transformador de `r dados$S`VA, `r dados$V1`/`r dados$V2`, `r dados$f`Hz. Se três transformadores iguais ao especificado forem ligados na configuração estrela/delta ($Y-\Delta$) e alimentados a partir de um gerador de tensão trifásica equilibrada de sequência positiva, com valor eficaz (de linha) igual a raiz quadrada de três vezes a tensão nominal do lado primário do transformador (lado de alta tensão), qual a tensão entre os terminais abertos (em módulo e ângulo) em cada um dos casos mostrados a seguir? Explicar cuidadosamente os resultados, concluindo se a ligação delta pode ou não ser fechada e por quê!! Para esta análise, os transformadores podem ser considerados ideais! 
 
-
+```{r fig.align='center', echo=FALSE, fig.cap='Enunciado', out.width='80%'}
+knitr::include_graphics('images/prob17/001.jpg', dpi = NA)
+```
 
 ## Resolução {-}
 
+Working on it :)
 
-
-```{r tab1, echo=FALSE}
-resultados <- data.frame(T1 = c(1,2),
-                         T2 = c(1,2),
-                         T3 = c(1,2),
-                         T4 = c(1,2))
-colnames(resultados) <- c("Variável", "Modelo T")
-k <- knitr::kable(resultados, booktabs = T, escape = FALSE, caption = "Comparação entre os modelos")
-kableExtra::kable_styling(k, latex_options = "hold_position")
-```
-
-
-
+<!-- ```{r tab1, echo=FALSE} -->
+<!-- resultados <- data.frame(T1 = c(1,2), -->
+<!--                          T2 = c(1,2), -->
+<!--                          T3 = c(1,2), -->
+<!--                          T4 = c(1,2)) -->
+<!-- colnames(resultados) <- c("Variável", "Modelo T") -->
+<!-- k <- knitr::kable(resultados, booktabs = T, escape = FALSE, caption = "Comparação entre os modelos") -->
+<!-- kableExtra::kable_styling(k, latex_options = "hold_position") -->
+<!-- ``` -->
 
 
 
 
-```{r probA001, fig.align='center', echo=FALSE, fig.cap='Circuito Inicial', out.width='80%'}
-#knitr::include_graphics('images/prob13A001.jpg', dpi = NA)
-```
+
+
+
+
 

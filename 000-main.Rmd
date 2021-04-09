@@ -6,7 +6,7 @@ params:
   departamento: "Departamento de Engenharia Elétrica e Eletrônica"
   disciplina: "Conversão Eletromecânica de Energia A"
   orientador: "Renato Lucas Pacheco"
-  titulo: "Trabalho 1"
+  titulo: "Trabalho 2"
   cidade: "Florianópolis"
   modelo: "2"
   ano: "2020"

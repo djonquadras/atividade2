@@ -4,11 +4,8 @@
 
 ## Enunciado {-}
 
-```{r, echo=FALSE, include=FALSE}
-source("equations.R", local = knitr::knit_global())
-```
-
-
-
+Working on it :)
 
 ## Resolução {-}
+
+Working on it :)
