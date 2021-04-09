@@ -4,7 +4,17 @@
 
 ## Enunciado {-}
 
-Working on it :)
+```{r, echo=FALSE, include=FALSE}
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados <- selecionaDados(questao115, params$modelo)
+```
+
+Um transformador de potência monofásico, de `r dados$S`VA, `r dados$V1`/`r dados$V2` V, `r dados$f`Hz, deve ser usado como autotransformador para alimentar um circuito de `r dados$CIRC`V a partir de um gerador de `r dados$GER`V. Sob carga nominal e fator de potência `r dados$FP1` indutivo, o rendimento do transformador monofásico foi calculado como de `r 100*(dados$R)`%. Para o autotransformador, pede-se:
+
+a. O diagrama de suas ligações (incluir as marcas de polaridade!);
+b. Sua potência aparente nominal, separando em potência transformada, potência passante e potência total;
+c. Seu rendimento a plena carga, com fatores de potência `r dados$FP1` indutivo e `r dados$FP2` indutivo. COMENTAR!
 
 ## Resolução {-}
 

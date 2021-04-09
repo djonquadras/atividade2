@@ -8,7 +8,7 @@ params:
   orientador: "Renato Lucas Pacheco"
   titulo: "Trabalho 2"
   cidade: "Florianópolis"
-  modelo: "4"
+  modelo: "2"
   ano: "2021"
 number_sections: true
 header-includes:
@@ -25,7 +25,7 @@ header-includes:
   - \usepackage{lastpage}
   - \usepackage[portuguese]{babel}
 
-fontsize: 12pt
+fontsize: 11pt
 ident: true
 mainfont: Arial
 geometry: "paperheight=29.7cm,paperwidth=21cm,left=3cm,right=2cm,top=4cm,bottom=2cm"

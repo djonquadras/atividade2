@@ -4,7 +4,28 @@
 
 ## Enunciado {-}
 
-Working on it :)
+```{r, echo=FALSE, include=FALSE}
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados <- selecionaDados(questao116, params$modelo)
+```
+
+Um transformador de três enrolamentos foi ensaiado para a obtenção de suas impedâncias de curto-circuito (parâmetros longitudinais). Percebeu-se que as componentes reativas em cada impedância, em módulo, foram maiores que dez vezes as respectivas componentes resistivas. As características nominais de cada enrolamento são:
+
+- Primário: `r dados$PV`V, `r dados$PP`VA;
+- Secundário: `r dados$SV`V, `r dados$SP`VA;
+- Terciário: `r dados$TV`V, `r dados$TP`VA;
+
+Após os ensaios em laboratório, os dados foram trabalhados e transformados em valores percentuais, como segue:
+
+- Ensaio 1: $Z_{ps}$ = `r 100*(dados$E1Z)`%, na base `r dados$E1V`V e `r dados$E1P`VA;
+- Ensaio 2: $Z_{ps}$ = `r 100*(dados$E2Z)`%, na base `r dados$E2V`V e `r dados$E2P`VA;
+- Ensaio 3: $Z_{ps}$ = `r 100*(dados$E3Z)`%, na base `r dados$E3V`V e `r dados$E3P`VA;
+
+Pede-se:
+
+a. Desenhar o circuito elétrico equivalente completo em por unidade (pu) com os cálculos e as indicações numéricas de cada parâmetro, usando como base potência nominal do enrolamento primário e as tensões nominais;
+b. Desenhar o circuito elétrico equivalente completo em Ohms ($\Omega$) com os cálculos e as indicações numéricas de cada parâmetro, referido ao terciário. 
 
 ## Resolução {-}
 

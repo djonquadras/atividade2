@@ -4,7 +4,27 @@
 
 ## Enunciado {-}
 
-Working on it :)
+```{r, echo=FALSE, include=FALSE}
+source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/enunciados.R", local = knitr::knit_global())
+dados <- selecionaDados(questao113, params$modelo)
+```
+
+
+Um transformador de potência de `r dados$S` VA, `r dados$V1`/`r dados$V2` V, `r dados$f` Hz, possui os seguintes parâmetros:
+
+$$
+\begin{cases}
+  r_1 = `r dados$R1`[\Omega]; \quad x_1 = `r dados$X1`[\Omega]; \quad g_m = `r dados$GM`[S]; \quad b_m = `r dados$BM`[S] \\
+  r_2 = `r dados$R2`[\Omega]; \quad x_2 = `r dados$X2`[\Omega] \quad (\text{Referidos ao lado 2})
+\end{cases}
+$$
+
+Três transformadores idênticos, dentro de cada da versão, são ligado formando um banco trifásico $\Delta$/Y. Usando os valores nominais do banco trifásico como valores de base (valores trifásicos!) e **usando a técnica p.u.**, pede-se:
+
+a. A tensão na fonte e a potência aparente fornecida pela fonte se o transformador estiver alimentando carga nominal (potência aparente e tensão nominais), fator de potência 0,6 capacitivo, usando o modelo impedância série;
+b. O rendimento e a regulação do transformador;
+c. Retornar aos valores reais e comparar as grandezas de fase obtidas com aquelas similares para o mesmo fator de potência, obtidas no Exemplo 1.13. Comentar!
 
 ## Resolução {-}
 
