@@ -1,0 +1,37 @@
+<!-- Criado por Djonathan Quadras -->
+
+# Questão 1.7 {-}
+
+## Enunciado {-}
+
+```{r, echo=FALSE, include=FALSE}
+source("equations.R", local = knitr::knit_global())
+```
+
+
+
+
+## Resolução {-}
+
+
+
+```{r tab1, echo=FALSE}
+resultados <- data.frame(T1 = c(1,2),
+                         T2 = c(1,2),
+                         T3 = c(1,2),
+                         T4 = c(1,2))
+colnames(resultados) <- c("Variável", "Modelo T")
+k <- knitr::kable(resultados, booktabs = T, escape = FALSE, caption = "Comparação entre os modelos")
+kableExtra::kable_styling(k, latex_options = "hold_position")
+```
+
+
+
+
+
+
+
+```{r probA001, fig.align='center', echo=FALSE, fig.cap='Circuito Inicial', out.width='80%'}
+#knitr::include_graphics('images/prob13A001.jpg', dpi = NA)
+```
+

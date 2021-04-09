@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+*.log
+*.html
 .Rdata
 .httr-oauth
 .DS_Store

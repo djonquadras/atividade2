@@ -1,0 +1,14 @@
+<!-- Criado por Djonathan Quadras -->
+
+# Questão 1.16 {-}
+
+## Enunciado {-}
+
+```{r, echo=FALSE, include=FALSE}
+source("equations.R", local = knitr::knit_global())
+```
+
+
+
+
+## Resolução {-}

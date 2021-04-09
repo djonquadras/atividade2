@@ -1,0 +1,5 @@
+<!-- Criado por Djonathan Quadras -->
+
+# Introdução {-}
+
+O presente trabalho as respostas das questões 1.3, 1.4, 1.5 e 1.6 presentes na versão 6s da apostila desenvolvida pelo Professor Doutor Renato Lucas Pacheco. O trabalho foi inteiramente desenvolvido em linguagem RMarkdown. Os códigos fonte para a sua elaboração contam em anexo.

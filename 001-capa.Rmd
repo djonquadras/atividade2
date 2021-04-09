@@ -1,0 +1,57 @@
+\centerline{`r toupper(params$universidade)`}
+\centerline{`r toupper(params$centro)`}
+\centerline{`r toupper(params$departamento)`}
+\centerline{`r toupper(params$disciplina)`}
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+\centerline{`r toupper(params$autor)`}
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+
+\centerline{`r toupper(params$titulo)`}
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+
+
+\centerline{`r toupper(params$cidade)`}
+\centerline{`r toupper(params$ano)`}
+

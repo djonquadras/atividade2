@@ -1,0 +1,139 @@
+---
+params:
+  autor: "Djonathan Luiz de Oliveira Quadras (15200695)"
+  universidade: "Universidade Federal de santa Catarina"
+  centro: "Centro Tecnológico"
+  departamento: "Departamento de Engenharia Elétrica e Eletrônica"
+  disciplina: "Conversão Eletromecânica de Energia A"
+  orientador: "Renato Lucas Pacheco"
+  titulo: "Trabalho 1"
+  cidade: "Florianópolis"
+  modelo: "2"
+  ano: "2020"
+number_sections: true
+header-includes:
+  - \usepackage{indentfirst} # Indenta o primeiro parágrafo de cada seção.
+  - \usepackage{setspace}\onehalfspacing
+  - \usepackage{amsmath} # para inserção de equações
+  - \usepackage{afterpage}
+  - \usepackage{changepage} # customização de margens para trechos específicos
+  - \usepackage{float}
+  - \usepackage{pdfpages} #Inserir arquivo pdf como página da tese - Útil para inserir um anexo, a folha de aprovação e ficha catalográfica
+  - \usepackage{colortbl} #Habilita cores para tabelas
+  - \usepackage{tocloft}\tocloftpagestyle{empty} #Estilo da página do sumário sem rodapé, e principalmente, sem número de páginas.
+  - \usepackage{fancyhdr}
+  - \usepackage{lastpage}
+  - \usepackage[portuguese]{babel}
+
+fontsize: 12pt
+ident: true
+mainfont: Arial
+geometry: "paperheight=29.7cm,paperwidth=21cm,left=3cm,right=2cm,top=4cm,bottom=2cm"
+output: bookdown::pdf_document2
+toc: false
+---
+
+\clearpage\thispagestyle{empty}\addtocounter{page}{-1} 
+
+```{r echo=FALSE, child="001-capa.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{empty}
+
+\newpage
+<!-- centralizando o título do sumário -->
+\renewcommand{\cfttoctitlefont}{\hspace*{\fill}\Huge\bfseries} 
+\renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
+<!-- centralizando título da lista de tabelas -->
+\renewcommand{\cftlottitlefont}{\hspace*{\fill}\Huge\bfseries}
+\renewcommand{\cftafterlottitle}{\hspace*{\fill}}
+<!-- centralizando título da lista de figuras -->
+\renewcommand{\cftloftitlefont}{\hspace*{\fill}\Huge\bfseries}
+\renewcommand{\cftafterloftitle}{\hspace*{\fill}}
+
+
+\newpage
+
+\setlength{\parindent}{1.5cm}
+
+<!--- Define Headers and Footers --->
+<!--- Define Headers and Footers --->
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \fancyhead[R]{\footnotesize \thepage\,}
+  \setlength\footskip{0pt}
+}
+
+
+\pagestyle{plain}
+```{r echo=FALSE, child="002-introdução.Rmd"}
+```
+
+\clearpage
+
+
+\newpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="003-questao107.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="004-questao108.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="005-questao109.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="006-questao110.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="007-questao111.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="008-questao112.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="009-questao113.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="010-questao114.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="011-questao115.Rmd"}
+```
+
+\clearpage
+
+\pagestyle{plain}
+```{r echo=FALSE, child="012-questao116.Rmd"}
+```
+
+\clearpage
+
