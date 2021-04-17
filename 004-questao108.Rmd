@@ -2,12 +2,11 @@
 
 # Questão 1.8 {-}
 
-## Enunciado {-}
-
 ```{r, echo=FALSE, include=FALSE}
-source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/solution108.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados <- selecionaDados(questao108, params$modelo)
+sol <- solution(dados)
 ```
 
 Um transformador trifásico abaixador de `r dados$S` VA, `r dados$V1`/`r dados$V2` V, `r dados$f` Hz, ligado em $Y$/$\Delta$ foi submetido a um ensaio de curto-circuito realizado pelo lado de baixa tensão (`r dados$V2`V) de onde se obteve a seguinte impedância equivalente, por fase: `r dados$Z` [$\Omega$]. Os seguintes resultados foram obtidos de um ensaio de circuito aberto, realizado pelo lado de baixa tensão, a `r dados$f` Hz: $P_{3\phi}$ = `r dados$P3PHI` W; $I_l$ = `r dados$IL` A; $V_l$ = `r dados$VL` V. O equipamento está alimentando uma carga trifásica equilibrada de `r dados$CARGA`W, com um fator de potência `r dados$FP` adiantado. A tensão na carga foi ajustada para `r dados$V2` V.
@@ -20,5 +19,28 @@ c. Comentar os resultados!
 
 ## Resolução {-}
 
-Working on it :)
+Inicialmente, para facilitar os cálculos, será feita a conversão do formato $\Delta$ para um formato Y. Assim,
+
+$$
+Z_{eq} = \frac{`r dados[["Z"]]`}{3} \implies \boxed{`r round(sol[["ZEQ"]],4)`\Omega} 
+$$
+
+Como é pedido o sistema referido ao lado de alta tensão (primário), será inicialmente encontrado sistema para o secundário e então convertido para o primário (uma vez que todos os valores encontrados foram para o secundário). Inicialmente determina-se o parâmetro de conversão $a = \frac{`r dados[["V1"]]`}{(\sqrt{3})(`r dados[["V2"]]`)} = `r sol[["a"]]`$.
+
+Define-se a tensão de fase na carga como $V_s = \frac{V_l}{\sqrt{3}} = `r round(sol[["vss"]],2)` V$. Também é possível determinar o ângulo de defasagem como $\phi = \arccos{`r dados[["FP"]]`} = `r sol[["phi"]]`^\circ$. Como $P_{3\phi} = (\sqrt{3})(V_{l})(I_{l})(fp)$, pode-se determinar a corrente de saída (no secundário.
+
+$$
+I_s = \frac{P_{3\phi}}{(\sqrt{3})(V_l)(fp)} = \frac{`r dados[["CARGA"]]`}{(\sqrt{3})(`r dados[["VL"]]`)(`r dados[["FP"]]`)}
+$$
+
+Assim,
+
+$$
+I_s = `r round(sol[["is"]],2)`A \quad \text{ou} \quad I_s = `r round(Mod(sol[["is"]]),2)` \angle `r round(rad2degree(Arg(sol[["is"]])),2)`^\circ A
+$$
+
+
+```{r fig.align='center', echo=FALSE, fig.cap='Relações entre Primário e Secundário', out.width='80%'}
+knitr::include_graphics('images/prob18/001.jpg', dpi = NA)
+```
 

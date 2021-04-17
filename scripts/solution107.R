@@ -5,12 +5,6 @@ degree2rad <- function(angle){
   return(pi*angle/180)
 }
 
-questao107 <- list(V1 = list(S = 110000, V1 = 4400, V2 = 440, f =60),
-                   V2 = list(S = 20000, V1 = 2400, V2 = 240, f =60),
-                   V3 = list(S = 50000, V1 = 2400, V2 = 120, f =60),
-                   V4 = list(S = 300000, V1 = 11000, V2 = 2300, f =60))
-
-
 solution <- function(dados){
   vef <-  round(sqrt(3)*dados$V1,2)
   

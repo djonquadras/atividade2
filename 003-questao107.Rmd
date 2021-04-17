@@ -2,8 +2,6 @@
 
 # Questão 1.7 {-}
 
-## Enunciado {-}
-
 ```{r, echo=FALSE, include=FALSE}
 source("scripts/solution107.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
