@@ -39,8 +39,54 @@ $$
 I_s = `r round(sol[["is"]],2)`A \quad \text{ou} \quad I_s = `r round(Mod(sol[["is"]]),2)` \angle `r round(rad2degree(Arg(sol[["is"]])),2)`^\circ A
 $$
 
+Com a corrente de saída, tensão na carga e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado secundário) por meio das Tensões de Kirchhoff.
 
-```{r fig.align='center', echo=FALSE, fig.cap='Relações entre Primário e Secundário', out.width='80%'}
+$$
+I_e = (Z_T)(I_c) + V_s = (`r dados[["Z"]]`)(`r sol[["is"]]`) + `r sol[["vss"]]`
+$$
+
+Assim,
+
+$$
+V_e = `r round(sol[["vps"]],2)` = `r round(Mod(sol[["vps"]]),2)` \angle `r round(rad2degree(Arg(sol[["vps"]])),2)` ^\circ V
+$$
+
+
+Considerando a Figura \@ref(fig:FIG108A), podemos encontrar os valores para o lado primário.
+
+```{r FIG108A, fig.align='center', echo=FALSE, fig.cap='Relações entre Primário e Secundário', out.width='80%'}
 knitr::include_graphics('images/prob18/001.jpg', dpi = NA)
 ```
+
+Assim, temos:
+
+```{r TAB108A, echo=FALSE}
+resultados <- data.frame(T1 = c("$V_e$","$I_e$","$S_T$", "$fp$"),
+                         T2 = c(paste(round(Mod(sol$vpp),2), "$\\angle ($", round(rad2degree(Arg(sol$vpp)),2), "$)^\\circ V$"),
+                                paste(round(Mod(sol$ip),2),"$\\angle ($", round(rad2degree(Arg(sol$ip)),2), "$)^\\circ A$"),
+                                paste(round(sol$sp,2),"VA"),
+                                round(sol$fpp,2)))
+colnames(resultados) <- c("Parâmetro", "Primário")
+k <- knitr::kable(resultados, booktabs = T, escape = FALSE, caption = "Valores para Primário e Secundário")
+kableExtra::kable_styling(k, latex_options = "hold_position")
+```
+
+O rendimento é calculado como
+
+$$
+\Re = \frac{|V_e|-|V_s|}{|V_s|} = \frac{`r round(Mod(sol[["vps"]]),2)` - `r round(Mod(sol[["vss"]]),2)`}{`r round(Mod(sol[["vss"]]),2)`} = `r round(sol[["re"]],2)` \implies \Re = `r round(100*sol[["re"]],2)` \%
+$$
+
+A regulação é definida por
+
+$$
+\eta = \frac{P_{s3\phi}}{P_{e3\phi}} = \frac{P_{s3\phi}}{P_{s3\phi} +P_{f3\phi}+P_{j3\phi}+P_{sup3\phi}}
+$$
+
+Assim,
+
+
+$$
+\eta = \frac{`r dados[["CARGA"]]`}{`r dados[["CARGA"]]` + `r dados[["P3PHI"]]` + `r sol[["pj3phi"]]` + 0} \implies \eta =`r round(100*sol[["n"]],2)` \%
+$$
 

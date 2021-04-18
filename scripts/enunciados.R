@@ -23,13 +23,13 @@ questao107 <- list(V1 = list(S = 110000, V1 = 4400, V2 = 440, f =60),
 
 
 
-questao108 <- list(V1 = list(S = 5000000,
-                             V1=132791,
+questao108 <- list(V1 = list(S = 15000000,
+                             V1=130000,
                              V2=23900,
                              f=60,
                              Z=complex(real = 1.14264, imaginary = 5.7132),
-                             P3PHI = 44900,
-                             IL=8.72,
+                             P3PHI = 134700,
+                             IL=15.1,
                              VL=23900,
                              CARGA=12000000,
                              FP=0.8,

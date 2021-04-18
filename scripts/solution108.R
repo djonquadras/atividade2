@@ -23,13 +23,19 @@ solution <- function(dados){
   is <- complex(modulus = is, argument = -phi)
   vss <- dados$VL/sqrt(3)
   vps <- is*zeqSEC + vss
-  
+
   vpp <- vps*a
   vsp <- vss/a
   zeqPRI <-  zeqSEC*(a^2)
   ip <- is/a
+  sp <- sqrt(30)*Mod(ip)*Mod(vpp)
+  fpp <- cos(Arg(vpp)-Arg(ip))
 
+  re <- (Mod(vps)-Mod(vss))/(Mod(vss))
+  pj3phi <- 3*Re(zeqSEC)*Mod(is)^2
+  n <- (dados$CARGA)/((dados$CARGA)+(dados$P3PHI)+(pj3phi))
   solution <- list(ZEQ = zeqSEC, a = a, zeqPRI = zeqPRI, is = is, phi = phi,
-                   vss = vss, vps = vps, vpp = vpp, vsp = vsp, ip = ip)
+                   vss = vss, vps = vps, vpp = vpp, vsp = vsp, ip = ip, sp = sp,
+                   fpp = fpp, re = re, n=n, pj3phi=pj3phi)
   return(solution)
 }

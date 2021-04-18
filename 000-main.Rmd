@@ -8,7 +8,7 @@ params:
   orientador: "Renato Lucas Pacheco"
   titulo: "Trabalho 2"
   cidade: "Florianópolis"
-  modelo: "1"
+  modelo: "2"
   ano: "2021"
 number_sections: true
 header-includes:
