@@ -42,7 +42,7 @@ $$
 Com a corrente de saída, tensão na carga e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado secundário) por meio das Tensões de Kirchhoff.
 
 $$
-I_e = (Z_T)(I_c) + V_s = (`r dados[["Z"]]`)(`r sol[["is"]]`) + `r sol[["vss"]]`
+V_e = (Z_T)(I_s) + V_s = (`r round(sol[["ZEQ"]],2)`)(`r round(sol[["is"]],2)`) + `r round(sol[["vss"]],2)`
 $$
 
 Assim,
@@ -62,8 +62,8 @@ Assim, temos:
 
 ```{r TAB108A, echo=FALSE}
 resultados <- data.frame(T1 = c("$V_e$","$I_e$","$S_T$", "$fp$"),
-                         T2 = c(paste(round(Mod(sol$vpp),2), "$\\angle ($", round(rad2degree(Arg(sol$vpp)),2), "$)^\\circ V$"),
-                                paste(round(Mod(sol$ip),2),"$\\angle ($", round(rad2degree(Arg(sol$ip)),2), "$)^\\circ A$"),
+                         T2 = c(paste(round(Mod(sol$ve),2), "$\\angle ($", round(rad2degree(Arg(sol$vpp)),2), "$)^\\circ V$"),
+                                paste(round(Mod(sol$ie),2),"$\\angle ($", round(rad2degree(Arg(sol$ip)),2), "$)^\\circ A$"),
                                 paste(round(sol$sp,2),"VA"),
                                 round(sol$fpp,2)))
 colnames(resultados) <- c("Parâmetro", "Primário")

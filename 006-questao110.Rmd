@@ -5,11 +5,11 @@
 ## Enunciado {-}
 
 ```{r, echo=FALSE, include=FALSE}
-source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/solution110.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados108 <- selecionaDados(questao108, params$modelo)
 dados110 <- selecionaDados(questao110, params$modelo)
-
+sol <- solution(dados108, dados110)
 ```
 
 Os dois transformadores abaixo são ligados em paralelo para alimentar uma carga trifásica equilibrada.
@@ -26,4 +26,52 @@ c. Comentar os resultados!
 
 ## Resolução {-}
 
-Working on it :)
+Para o lado primário, é considerado uma tensão de `r round(dados108$V1,2)`V de linha e `r round(sol$solTrafo1$vATFase,2)`V de fase, além de uma tensão no secundário de `r round(dados108$V2,2)`V de linha e  `r round(sol$solTrafo1$vBTFase,2)`V de fase no estrela equivalente. Assim, será utilizado um fator de conversão igual
+
+$$
+a = \frac{`r round(sol[["solTrafo1"]][["vATFase"]],2)`}{`r round(sol[["solTrafo1"]][["vBTFase"]],2)`} \quad \boxed{a = `r round(sol[["solTrafo1"]][["a"]],2)`}
+$$
+
+
+Inicialmente, transforma-se as impedâncias para o seu modelo estrela equivalente (ao lado primário).
+
+$$
+Z_{eq1Y} = a\frac{`r dados108[["Z"]]`}{3}  \quad Z_{eq2Y} = a\frac{`r dados110[["Z"]]`}{3}
+$$
+
+Assim,
+
+$$
+\boxed{Z_{eq1} = `r round(sol[["solTrafo1"]][["zyEqPri"]],2)` = `r round(Mod(sol[["solTrafo1"]][["zyEqPri"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo1"]][["zyEqPri"]])),2)`)^\circ\Omega}  \quad \text{ e } \quad \boxed{Z_{eq2} =  `r round(sol[["solTrafo2"]][["zyEqSec"]],2)` = `r round(Mod(sol[["solTrafo2"]][["zyEqPri"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo2"]][["zyEqPri"]])),2)`)^\circ\Omega}
+$$
+
+Também é possível encontrar a tensão na carga fazendo-se $V_c = aV_{c_{fase}}$. Assim: $V_c = `r round(sol[["solTrafo1"]][["vcr"]],2)`$V. É possível calcular a corrente na carga por meio de $P_{c_{3\phi}} = \sqrt{3}V_{c_{linha}}I_{c_{linha}}fp$. Assim:
+
+$$
+I_{c} = `r dados110[["FP"]]`\frac{`r dados108[["CARGA"]]`}{\sqrt{3}`r dados108[["V1"]]`} \implies \boxed{I_{c} = `r round(Mod(sol[["solCarga"]][["is"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solCarga"]][["is"]])),2)`)^\circ A}
+$$
+
+Com isso, é possível calcular as correntes de saída de ambos os transformadores por meio de
+
+$$
+I_1 = \frac{Z_{eq2}}{Z_{eq1}}I_2 \quad \text{ e } \quad I_1 + I_2 = I_c
+$$
+
+Assim, tem-se
+
+$$
+\boxed{I_1 =  `r round(sol[["solTrafo1"]][["is"]],2)`A = `r round(Mod(sol[["solTrafo1"]][["is"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo1"]][["is"]])),2)`)^\circ A}  \quad \text{ e } \quad  \boxed{I_2 = `r round(sol[["solTrafo2"]][["is"]],2)` = `r round(Mod(sol[["solTrafo2"]][["is"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo2"]][["is"]])),2)`)^\circ A}
+$$
+
+Assim, é possível descobrir a potência fornecida por cada transformador fazendo-se $S = VI$. Tem-se, então:
+
+$$
+\boxed{S_1 =  `r round(Mod(sol[["solTrafo1"]][["ss"]]),2)` VA}  \quad \text{ e } \quad  \boxed{S_2 = `r round(Mod(sol[["solTrafo2"]][["ss"]]),2)`VA}
+$$
+
+Com o valor da corrente de saída, e sabendo que $I_e = aI_s$, tem-se que a corrente de entrada é de
+
+$$
+\boxed{I_e = `r round(sol[["solCarga"]][["ie"]],2)` A =  `r round(Mod(sol[["solCarga"]][["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solCarga"]][["ie"]])),2)`)^\circ A}
+$$
+
