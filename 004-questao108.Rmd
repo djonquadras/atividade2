@@ -25,56 +25,49 @@ $$
 Z_{eq} = \frac{`r dados[["Z"]]`}{3} \implies \boxed{`r round(sol[["ZEQ"]],4)`\Omega} 
 $$
 
-Como é pedido o sistema referido ao lado de alta tensão (primário), será inicialmente encontrado sistema para o secundário e então convertido para o primário (uma vez que todos os valores encontrados foram para o secundário). Inicialmente determina-se o parâmetro de conversão $a = \frac{`r dados[["V1"]]`}{(\sqrt{3})(`r dados[["V2"]]`)} = `r sol[["a"]]`$.
-
-Define-se a tensão de fase na carga como $V_s = \frac{V_l}{\sqrt{3}} = `r round(sol[["vss"]],2)` V$. Também é possível determinar o ângulo de defasagem como $\phi = \arccos{`r dados[["FP"]]`} = `r sol[["phi"]]`^\circ$. Como $P_{3\phi} = (\sqrt{3})(V_{l})(I_{l})(fp)$, pode-se determinar a corrente de saída (no secundário.
+Tem-se do enunciado do problema para o primário uma tensão de `r round(sol$vBTLinha,2)`V de linha e `r round(sol$vATFase,2)`V de fase, além de uma tensão no secundário de `r round(sol$vBTLinha,2)`V de linha e  `r round(sol$vBTFase,2)`V de fase no estrela equivalente. Assim, será utilizado um fator de conversão de 
 
 $$
-I_s = \frac{P_{3\phi}}{(\sqrt{3})(V_l)(fp)} = \frac{`r dados[["CARGA"]]`}{(\sqrt{3})(`r dados[["VL"]]`)(`r dados[["FP"]]`)}
+a = \frac{`r round(sol[["vATFase"]],2)`}{`r round(sol[["vBTFase"]],2)`} \quad \boxed{a = `r round(sol[["a"]],2)`}
+$$
+
+Desse modo, tem-se a impedância equivalente
+
+$$
+\boxed{Z_{eq} = `r round(sol[["zeqPRI"]],2)` = `r round(Mod(sol[["zeqPRI"]]),2)` \angle (`r round(rad2degree(Arg(sol[["zeqPRI"]])),2)`)^\circ\Omega}
+$$
+
+Também é possível encontrar a tensão na carga fazendo-se $V_c = aV_c$. Assim: $V_c = `r round(sol[["vcr"]],2)`$V. É possível calcular a corrente na carga por meio de $P_{c_{3\phi}} = \sqrt{3}V_c I_c fp$. Assim:
+
+$$
+I_{c} = `r dados[["FP"]]`\frac{`r dados[["CARGA"]]`}{\sqrt{3}`r dados[["V1"]]`} \implies \boxed{I_{c} = `r round(Mod(sol[["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ic"]])),2)`)^\circ A}
+$$
+
+Com o valor da corrente de saída, e sabendo que $I_e = aI_c$, tem-se que a corrente de entrada é de
+
+$$
+\boxed{I_e = `r round(sol[["ie"]],2)` A =  `r round(Mod(sol[["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ie"]])),2)`)^\circ A}
+$$
+
+
+Com a corrente de entrada, tensão na carga e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado secundário) por meio das Tensões de Kirchhoff.
+
+$$
+V_e = (Z_T)(I_e) + V_c = (`r round(sol[["zeqPRI"]],2)`)(`r round(sol[["is"]],2)`) + `r round(sol[["vcr"]],2)`
 $$
 
 Assim,
 
 $$
-I_s = `r round(sol[["is"]],2)`A \quad \text{ou} \quad I_s = `r round(Mod(sol[["is"]]),2)` \angle `r round(rad2degree(Arg(sol[["is"]])),2)`^\circ A
+V_e = `r round(sol[["ve"]],2)` = `r round(Mod(sol[["ve"]]),2)` \angle `r round(rad2degree(Arg(sol[["ve"]])),2)` ^\circ V
 $$
 
-Com a corrente de saída, tensão na carga e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado secundário) por meio das Tensões de Kirchhoff.
-
-$$
-V_e = (Z_T)(I_s) + V_s = (`r round(sol[["ZEQ"]],2)`)(`r round(sol[["is"]],2)`) + `r round(sol[["vss"]],2)`
-$$
-
-Assim,
-
-$$
-V_e = `r round(sol[["vps"]],2)` = `r round(Mod(sol[["vps"]]),2)` \angle `r round(rad2degree(Arg(sol[["vps"]])),2)` ^\circ V
-$$
-
-
-Considerando a Figura \@ref(fig:FIG108A), podemos encontrar os valores para o lado primário.
-
-```{r FIG108A, fig.align='center', echo=FALSE, fig.cap='Relações entre Primário e Secundário', out.width='80%'}
-knitr::include_graphics('images/prob18/001.jpg', dpi = NA)
-```
-
-Assim, temos:
-
-```{r TAB108A, echo=FALSE}
-resultados <- data.frame(T1 = c("$V_e$","$I_e$","$S_T$", "$fp$"),
-                         T2 = c(paste(round(Mod(sol$ve),2), "$\\angle ($", round(rad2degree(Arg(sol$vpp)),2), "$)^\\circ V$"),
-                                paste(round(Mod(sol$ie),2),"$\\angle ($", round(rad2degree(Arg(sol$ip)),2), "$)^\\circ A$"),
-                                paste(round(sol$sp,2),"VA"),
-                                round(sol$fpp,2)))
-colnames(resultados) <- c("Parâmetro", "Primário")
-k <- knitr::kable(resultados, booktabs = T, escape = FALSE, caption = "Valores para Primário e Secundário")
-kableExtra::kable_styling(k, latex_options = "hold_position")
-```
+Com os valores de $V_e$ e $I_e$, é possível calcular $S_e$ por meio de $S_e = \sqrt{3} I_e V_e$. Assim, $S_e = `r round(sol[["se"]],2)`VA$. O fator de potência na fonte é de $fp_e = \cos(\theta_v-\theta_i) = `r round(sol[["fpe"]],2)`$
 
 O rendimento é calculado como
 
 $$
-\Re = \frac{|V_e|-|V_s|}{|V_s|} = \frac{`r round(Mod(sol[["vps"]]),2)` - `r round(Mod(sol[["vss"]]),2)`}{`r round(Mod(sol[["vss"]]),2)`} = `r round(sol[["re"]],2)` \implies \Re = `r round(100*sol[["re"]],2)` \%
+\Re = \frac{|V_e|-|V_s|}{|V_s|} = \frac{`r round(Mod(sol[["ve"]]),2)` - `r round(Mod(sol[["vcr"]]),2)`}{`r round(Mod(sol[["vcr"]]),2)`} = `r round(sol[["re"]],2)` \implies \Re = `r round(100*sol[["re"]],2)` \%
 $$
 
 A regulação é definida por
