@@ -48,7 +48,7 @@ $$
 Também é possível encontrar a tensão na carga fazendo-se $V_c = aV_{c_{fase}}$. Assim: $V_c = `r round(sol[["solTrafo1"]][["vcr"]],2)`$V. É possível calcular a corrente na carga por meio de $P_{c_{3\phi}} = \sqrt{3}V_{c_{linha}}I_{c_{linha}}fp$. Assim:
 
 $$
-I_{c} = `r dados110[["FP"]]`\frac{`r dados108[["CARGA"]]`}{\sqrt{3}`r dados108[["V1"]]`} \implies \boxed{I_{c} = `r round(Mod(sol[["solCarga"]][["is"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solCarga"]][["is"]])),2)`)^\circ A}
+I_{c} = `r dados110[["FP"]]`\frac{`r dados108[["CARGA"]]`}{\sqrt{3}`r dados108[["V1"]]`} \implies \boxed{I_{c} = `r round(Mod(sol[["solCarga"]][["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solCarga"]][["ic"]])),2)`)^\circ A}
 $$
 
 Com isso, é possível calcular as correntes de saída de ambos os transformadores por meio de
@@ -60,7 +60,7 @@ $$
 Assim, tem-se
 
 $$
-\boxed{I_1 =  `r round(sol[["solTrafo1"]][["is"]],2)`A = `r round(Mod(sol[["solTrafo1"]][["is"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo1"]][["is"]])),2)`)^\circ A}  \quad \text{ e } \quad  \boxed{I_2 = `r round(sol[["solTrafo2"]][["is"]],2)` = `r round(Mod(sol[["solTrafo2"]][["is"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo2"]][["is"]])),2)`)^\circ A}
+\boxed{I_1 =  `r round(sol[["solTrafo1"]][["ic"]],2)`A = `r round(Mod(sol[["solTrafo1"]][["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo1"]][["ic"]])),2)`)^\circ A}  \quad \text{ e } \quad  \boxed{I_2 = `r round(sol[["solTrafo2"]][["ic"]],2)` = `r round(Mod(sol[["solTrafo2"]][["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo2"]][["ic"]])),2)`)^\circ A}
 $$
 
 Assim, é possível descobrir a potência fornecida por cada transformador fazendo-se $S = VI$. Tem-se, então:
@@ -69,9 +69,40 @@ $$
 \boxed{S_1 =  `r round(Mod(sol[["solTrafo1"]][["ss"]]),2)` VA}  \quad \text{ e } \quad  \boxed{S_2 = `r round(Mod(sol[["solTrafo2"]][["ss"]]),2)`VA}
 $$
 
-Com o valor da corrente de saída, e sabendo que $I_e = aI_s$, tem-se que a corrente de entrada é de
+Com o valor da corrente de saída, e sabendo que $I_e = aI_c$, tem-se que a corrente de entrada é de
 
 $$
 \boxed{I_e = `r round(sol[["solCarga"]][["ie"]],2)` A =  `r round(Mod(sol[["solCarga"]][["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solCarga"]][["ie"]])),2)`)^\circ A}
 $$
 
+Tendo a corrente de saída, os valores das impedâncias e o valor da tensão na carga é possível encontrar o valor de tensão na fonte fazendo-se $V_e = (Z_{eq1}||Z_{eq2})I_e + Vc$. Assim,
+
+$$
+V_e = (`r round(sol[["solCarga"]][["Zpar"]],2)`)(`r round(sol[["solCarga"]][["ie"]],2)`) + `r round(sol[["solTrafo1"]][["vcr"]],2)` \implies \boxed{V_e = `r round(sol[["solCarga"]][["ve"]],2)` V = `r round(Mod(sol[["solCarga"]][["ve"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solCarga"]][["ve"]])),2)`)^\circ V}
+$$
+
+Com os valores de $V_e$ e $I_e$, é possível calcular $S_e$ por meio de $S_e = \sqrt{3} I_e V_e$. Assim, $S_e = `r round(sol[["solCarga"]][["sfonte"]],2)`VA$. O fator de potência na fonte é de $fp_e = \cos(\theta_v-\theta_i) = `r sol[["solCarga"]][["fpfonte"]]`$
+
+Com os valores de impedância, corrente de saída e tensões, é possível determinar a tensão de entrada de cada um dos dois transformadores.
+
+$$
+\boxed{V_{e1} =  `r round(Mod(sol[["solTrafo1"]][["ve"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo1"]][["ve"]])),2)`)^\circ V}  \quad \text{ e } \quad  \boxed{V_{e2} = `r round(Mod(sol[["solTrafo2"]][["ve"]]),2)` \angle (`r round(rad2degree(Arg(sol[["solTrafo2"]][["ve"]])),2)`)^\circ V}
+$$
+
+Com os valores de tensão e corrente é possível determinar o fator de potência de entrada de cada um dos dois transformadores.
+
+$$
+\boxed{fp_1 =  `r round(sol[["solTrafo1"]][["fp"]],2)`}  \quad \text{ e } \quad  \boxed{fp_2 = `r round(sol[["solTrafo2"]][["fp"]],2)`}
+$$
+
+O rendimento dos dois transformadores é dado por $\Re = \frac{V_e-V_s}{V_s}$, então.
+
+$$
+\boxed{\Re_1 =  `r round(100*sol[["solTrafo1"]][["re"]],2)`\%}  \quad \text{ e } \quad  \boxed{\Re_2 = `r round(100*sol[["solTrafo2"]][["re"]],2)`\%}
+$$
+
+Por fim, a regulação dos dois transformadores é dado por $\eta = \frac{P_{s3\phi}}{P_{e3\phi}}$, então.
+
+$$
+\boxed{\eta_1 =  `r round(100*sol[["solTrafo1"]][["n"]],2)`\%}  \quad \text{ e } \quad  \boxed{\eta_2 = `r round(100*sol[["solTrafo2"]][["n"]],2)`\%}
+$$
