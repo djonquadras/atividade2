@@ -2,4 +2,4 @@
 
 # Introdução {-}
 
-O presente trabalho as respostas das questões 1.7, 1.8, 1.9, 1.10, 1.13, 1.14, 1.15 e 1.16 presentes na versão 6t da apostila desenvolvida pelo Professor Doutor Renato Lucas Pacheco. O trabalho foi inteiramente desenvolvido em linguagem RMarkdown. Os códigos fonte para a sua elaboração contam em anexo. Importante: o padrão de numeração utilizado é do formato americano (com separação decimal utilizando ponto e não vírgula).
+O presente trabalho as respostas das questões 1.7, 1.8, 1.9, 1.10, 1.13, 1.14, 1.15 e 1.16 presentes na versão 6t da apostila desenvolvida pelo Professor Doutor Renato Lucas Pacheco. O trabalho foi inteiramente desenvolvido em linguagem RMarkdown. Os códigos fonte para a sua elaboração contam em anexo. Importante: o padrão de numeração utilizado é do formato americano (com separação decimal utilizando ponto e não vírgula). Você pode acessar aos códigos fontes utilizados para a realização deste trabalho [\textcolor{blue}{aqui}](https://github.com/djonquadras/atividade2). 

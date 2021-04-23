@@ -6,9 +6,10 @@
 
 
 ```{r, echo=FALSE, include=FALSE}
-source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/solution113.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados <- selecionaDados(questao113, params$modelo)
+sol <- solution(dados)
 ```
 
 
@@ -30,4 +31,48 @@ c. Retornar aos valores reais e comparar as grandezas obtidas com aquelas simila
 
 ## Resolução {-}
 
-Working on it :)
+Inicialmente, são determinados os valores base. De acordo com o enunciado, tem-se como valores base: $S_{base} = `r sol[["sbase"]]` VA$, $V_{a_{base}} = `r sol[["vbasea"]]`V$, $V_{b_{base}} = `r sol[["vbaseb"]]`V$. Como $I_{base} = \frac{S_{base}}{V_{base}}$, então $I_{a_{base}} = `r round(sol[["ibasea"]],2)`A$ e $I_{b_{base}} = `r round(sol[["ibaseb"]],2)`A$
+
+Considerando o modelo de impedância em série, tem-se a impedância equivalente de $Z = `r sol[["z"]]`\Omega$. Também é possível determinar a corrente de entrada fazendo-se 
+
+$$
+I_e = \frac{S}{(a)(V_2)} \angle(-\arccos{fp}) = `r round(Mod(sol[["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ie"]])),2)`)^\circ A.
+$$
+
+Assim, a corrente de saída é tida por $I_c = `r round(Mod(sol[["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ic"]])),2)`)^\circ A$ . Com os valores de $I_e$, $Z$ e $V_c$, é possível calcular a tensão na fonte fazendo-se $V_e = (Z)(I_e) + V_c$. Assim, 
+
+$$
+V_e = `r round(Mod(sol[["ve"]]),2)`\angle(`r round(rad2degree(Arg(sol[["ve"]])),2)`)^\circ V.
+$$
+
+Dessa forma, tem-se que a potência aparente fornecida pela fonte como 
+
+$$
+S_e = `r round(sol[["se"]],2)`.
+$$
+
+Tendo os valores calculados, é possível encontrar os valores de tensão por unidade, fazendo-se 
+
+$$
+V_{e_{p.u.}} = \frac{V_e}{V_{a_{base}}} = \frac{`r sol[["ve"]]`}{`r sol[["vbasea"]]`} \implies \boxed{V_{e_{p.u.}} = `r round(Mod(sol[["vepu"]]),2)` \angle(`r round(rad2degree(Arg(sol[["vepu"]])),2)`)^\circ pu}
+$$
+
+e o valor da potência por unidade fazendo-se
+
+$$
+S_{e_{p.u.}} = \frac{S_e}{S_{base}} = \frac{`r sol[["se"]]`}{`r sol[["sbase"]]`} \implies \boxed{S_{e_{p.u.}} = `r round(sol[["sepu"]],2)`pu}
+$$
+
+A regulação é dada por
+
+$$
+\Re = \frac{V_{e_{p.u.}}-V_{c_{p.u.}}}{V_{c_{p.u.}}} \implies \boxed{\Re = `r round(100*sol[["re"]],2)`\%}
+$$
+
+O rendimento é dado por
+
+$$
+\eta = \frac{P_{c_{p.u.}}}{P_{e_{p.u.}}} \implies \boxed{\eta = `r round(100*sol[["n"]],2)`\%}
+$$
+
+Percebe-se que, como esperado, o rendimento é precisamente o mesmo que o encontrado no exemplo 1.5. No entanto, houve uma variação em relaçao à regulação, também conforme esperado, devido a uma alteração de uma carga indutiva para uma carga capacitiva.
