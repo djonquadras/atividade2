@@ -20,7 +20,7 @@ $$
 \end{cases}
 $$
 
-Três transformadores idênticos, dentro de cada da versão, são ligado formando um banco trifásico $\Delta$/Y. Usando os valores nominais do banco trifásico como valores de base (valores trifásicos!) e **usando a técnica p.u.**, pede-se:
+Três transformadores idênticos são ligado formando um banco trifásico $\Delta$/Y. Usando os valores nominais do banco trifásico como valores de base (valores trifásicos!) e **usando a técnica p.u.**, pede-se:
 
 a. A tensão na fonte e a potência aparente fornecida pela fonte se o transformador estiver alimentando carga nominal (potência aparente e tensão nominais), fator de potência 0,6 capacitivo, usando o modelo impedância série;
 b. O rendimento e a regulação do transformador;
@@ -28,9 +28,11 @@ c. Retornar aos valores reais e comparar as grandezas de fase obtidas com aquela
 
 ## Resolução {-}
 
-Inicialmente, são determinados os valores base. De acordo com o enunciado, tem-se como valores base: $S_{base} = `r sol[["sbase"]]` VA$, $V_{a_{base}} = `r sol[["vbasea"]]`V$, $V_{b_{base}} = `r sol[["vbaseb"]]`V$. Como $I_{base} = \frac{S_{base}}{V_{base}}$, então $I_{a_{base}} = `r round(sol[["ibasea"]],2)`A$ e $I_{b_{base}} = `r round(sol[["ibaseb"]],2)`A$
+Inicialmente, determina-se que para simplificar a solução será optado por reduzir o sistema trifásico equilibrado a uma única fase de um sistema estrela equivalente. Será considerado um fator de conversão como $a = \frac{`r sol[["vfaseP"]]`}{`r sol[["vfaseS"]]`} = `r sol[["a"]]`$. Também pode-se determinar os valores nominais de tensão. Assim, tem-se `r sol[["vfaseP"]]`V de fase e `r sol[["vlinhaP"]]`V de linha para o primário e `r sol[["vfaseS"]]`V de fase e `r round(sol[["vlinhaS"]],2)`V de linha para o secundário.
 
-Considerando o modelo de impedância em série, tem-se a impedância equivalente de $Z = `r sol[["z"]]`\Omega$. Também é possível determinar a corrente de entrada fazendo-se 
+Assim, como as impedâncias já foram dadas sendo consideradas pelo lado de baixa tensão, tem-se a impedância equivalente de $Z = `r sol[["z"]]`\Omega$. Também pode-se determinar os valores base de acordo com o enunciado, tem-se como valores base: $S_{base} = `r sol[["sbase"]]` VA$ (triplo da potência por serem três transformadores), $V_{a_{base}} = `r sol[["vbasea"]]`V$, $V_{b_{base}} = `r round(sol[["vbaseb"]],2)`V$. Como $I_{base} = \frac{S_{base}}{V_{base}}$, então $I_{a_{base}} = `r round(sol[["ibasea"]],2)`A$ e $I_{b_{base}} = `r round(sol[["ibaseb"]],2)`A$
+
+Considerando o modelo de impedância em série também é possível determinar a corrente de entrada fazendo-se 
 
 $$
 I_e = \frac{S}{(a)(V_2)} \angle(-\arccos{fp}) = `r round(Mod(sol[["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ie"]])),2)`)^\circ A.
@@ -72,4 +74,4 @@ $$
 \eta = \frac{P_{c_{p.u.}}}{P_{e_{p.u.}}} \implies \boxed{\eta = `r round(100*sol[["n"]],2)`\%}
 $$
 
-Percebe-se que, como esperado, o rendimento é precisamente o mesmo que o encontrado no exemplo 1.5. No entanto, houve uma variação em relaçao à regulação, também conforme esperado, devido a uma alteração de uma carga indutiva para uma carga capacitiva.
+Percebe-se que, como esperado, o rendimento e a regulação são precisamente os mesmos que os encontrados no exemplo 1.13.

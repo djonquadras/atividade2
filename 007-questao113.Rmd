@@ -2,14 +2,12 @@
 
 # Questão 1.13 {-}
 
-
 ```{r, echo=FALSE, include=FALSE}
 source("scripts/solution113.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados <- selecionaDados(questao113, params$modelo)
 sol <- solution(dados)
 ```
-
 
 Um transformador de potência de `r dados$S` VA, `r dados$V1`/`r dados$V2` V, `r dados$f` Hz, possui os seguintes parâmetros:
 

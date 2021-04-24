@@ -20,16 +20,21 @@ V1 = list(S = 110000, V1 = 4400, V2 = 440, f =60,
 
 solution <- function(dados){
   
-  sbase <- dados$S
-  vbasea <- dados$V1
-  vbaseb <- dados$V2
+  sbase <- 3*dados$S
+  vlinhaP <- dados$V1
+  vfaseP <- dados$V1
+  vlinhaS <- sqrt(3)*dados$V2
+  vfaseS <- dados$V2
+  
+  vbasea <- vlinhaP
+  vbaseb <- vlinhaS
   ibasea <- sbase/vbasea
   ibaseb <- sbase/vbaseb
   a <- dados$V1/dados$V2
   z <- complex(real = (dados$R1 + (a^2)*dados$R2), imaginary = (dados$X1+ (a^2)*dados$X2))
-  ie <- complex(modulus = (dados$S/(a*dados$V2)), argument = -calculaAngulo(dados$fp, dados$adiantado))
+  ie <- complex(modulus = (sbase/(a*vlinhaS)), argument = -calculaAngulo(dados$fp, dados$adiantado))
   ic <- ie/a
-  vc <- a*dados$V2
+  vc <- a*vlinhaS
   ve <- z*ie + vc
   se <- Mod(ve)*Mod(ie)
   vepu <- ve/vbasea
@@ -40,7 +45,8 @@ solution <- function(dados){
   pcpu <- 1*dados$fp
   n <- pcpu/pepu
   
-  solution <- list(sbase=sbase, vbasea=vbasea, vbaseb=vbaseb,ibasea=ibasea, ibaseb=ibaseb, z=z,
+  solution <- list(sbase=sbase, vlinhaP=vlinhaP, vlinhaS=vlinhaS, vfaseS=vfaseS, vfaseP=vfaseP, a=a,
+                   vbasea=vbasea, vbaseb=vbaseb,ibasea=ibasea, ibaseb=ibaseb, z=z,
                    ie = ie, vc=vc, ve=ve,se=se, ic=ic, vepu=vepu, sepu=sepu,re=re,n=n)
   
   return(solution)
