@@ -2,8 +2,6 @@
 
 # Questão 1.13 {-}
 
-## Enunciado {-}
-
 
 ```{r, echo=FALSE, include=FALSE}
 source("scripts/solution113.R", local = knitr::knit_global())

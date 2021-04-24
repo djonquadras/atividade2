@@ -2,7 +2,6 @@
 
 # Questão 1.9 {-}
 
-## Enunciado {-}
 
 ```{r, echo=FALSE, include=FALSE}
 source("scripts/equations.R", local = knitr::knit_global())
