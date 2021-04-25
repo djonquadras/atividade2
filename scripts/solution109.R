@@ -14,3 +14,36 @@ calculaAngulo <- function(fp, adiantado){
   return(phi)
 }
 
+
+
+solution <- function(dados){
+  
+  vATFase <- dados$V1/sqrt(3)
+  vATLinha <- (dados$V1)
+  vBTLinha <- (dados$V2)
+  vBTFase <- (dados$V2)/sqrt(3)
+  a <- vATFase/vBTFase
+  zeqSEC <- dados$Z/3
+  zeqPRI <- (a^2)*(dados$Z)/3
+  ve <- vATFase
+  ic <- complex(modulus = (dados$CARGA)/(sqrt(3)*vATFase), argument = -calculaAngulo(dados$FP, dados$ADIANTADO))
+  ie = a*ic
+  vcr <- ve - ic*zeqPRI 
+  
+  
+  
+  phi <- calculaAngulo(dados$FP, dados$ADIANTADO)
+  
+  
+  sfonte <- sqrt(3)*Mod(ie)*Mod(ve)
+  fpe <- cos(Arg(ve)-Arg(ie))
+  
+  re <- (Mod(ve)-Mod(vcr))/(Mod(vcr))
+  pj3phi <- 3*Re(zeqSEC)*Mod(ic)^2
+  n <- (dados$CARGA)/((dados$CARGA)+(dados$P3PHI)+(pj3phi))
+  
+  solution <- list(ZEQ = zeqSEC, a = a, zeqPRI = zeqPRI, is = ic, phi = phi,
+                   se = sfonte, fpe = fpe, re = re, n=n, pj3phi=pj3phi,
+                   ve = ve, ic = ic, vcr=vcr, ie=ie,vcr=vcr, vATFase=vATFase, vATLinha=vATLinha, vBTLinha=vBTLinha, vBTFase=vBTFase)
+  return(solution)
+}

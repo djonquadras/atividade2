@@ -40,7 +40,7 @@ $$
 Também é possível encontrar a tensão na carga fazendo-se $V_c = aV_c$. Assim: $V_c = `r round(sol[["vcr"]],2)`$V. É possível calcular a corrente na carga por meio de $P_{c_{3\phi}} = \sqrt{3}V_c I_c fp$. Assim:
 
 $$
-I_{c} = `r dados[["FP"]]`\frac{`r dados[["CARGA"]]`}{\sqrt{3}`r dados[["V1"]]`} \implies \boxed{I_{c} = `r round(Mod(sol[["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ic"]])),2)`)^\circ A}
+I_{c} = \frac{`r dados[["CARGA"]]`}{\sqrt{3}`r dados[["V1"]]`(`r dados[["FP"]]`)} \implies \boxed{I_{c} = `r round(Mod(sol[["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ic"]])),2)`)^\circ A}
 $$
 
 Com o valor da corrente de saída, e sabendo que $I_e = aI_c$, tem-se que a corrente de entrada é de
@@ -50,10 +50,10 @@ $$
 $$
 
 
-Com a corrente de entrada, tensão na carga e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado secundário) por meio das Tensões de Kirchhoff.
+Com a corrente de entrada, tensão na carga e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado primário) por meio das Tensões de Kirchhoff.
 
 $$
-V_e = (Z_T)(I_e) + V_c = (`r round(sol[["zeqPRI"]],2)`)(`r round(sol[["is"]],2)`) + `r round(sol[["vcr"]],2)`
+V_e = (Z_T)(I_e) + V_c = (`r round(sol[["zeqPRI"]],2)`)(`r round(sol[["ie"]],2)`) + `r round(sol[["vcr"]],2)`
 $$
 
 Assim,
@@ -64,13 +64,13 @@ $$
 
 Com os valores de $V_e$ e $I_e$, é possível calcular $S_e$ por meio de $S_e = \sqrt{3} I_e V_e$. Assim, $S_e = `r round(sol[["se"]],2)`VA$. O fator de potência na fonte é de $fp_e = \cos(\theta_v-\theta_i) = `r round(sol[["fpe"]],2)`$
 
-O rendimento é calculado como
+A regulação é calculada como
 
 $$
 \Re = \frac{|V_e|-|V_s|}{|V_s|} = \frac{`r round(Mod(sol[["ve"]]),2)` - `r round(Mod(sol[["vcr"]]),2)`}{`r round(Mod(sol[["vcr"]]),2)`} = `r round(sol[["re"]],2)` \implies \Re = `r round(100*sol[["re"]],2)` \%
 $$
 
-A regulação é definida por
+o rendimento é definido por
 
 $$
 \eta = \frac{P_{s3\phi}}{P_{e3\phi}} = \frac{P_{s3\phi}}{P_{s3\phi} +P_{f3\phi}+P_{j3\phi}+P_{sup3\phi}}

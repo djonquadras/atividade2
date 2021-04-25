@@ -4,9 +4,10 @@
 
 
 ```{r, echo=FALSE, include=FALSE}
-source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/solution109.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados <- selecionaDados(questao108, params$modelo)
+sol <- solution(dados)
 ```
 
 Para a sua versão, no exemplo anterior, ajustando a tensão na entrada do transformador para o seu valor nominal, se o transformador está fornecendo corrente nominal a fator de potência 0,6 capacitivo, pede-se: 
@@ -17,4 +18,66 @@ c. Comparar com os resultados do Exemplo 1.8: Transformador trifásico abaixador
 
 ## Resolução {-}
 
-Working on it :)
+Inicialmente, para facilitar os cálculos, será feita a conversão do formato $\Delta$ para um formato Y. Assim,
+
+$$
+Z_{eq} = \frac{`r dados[["Z"]]`}{3} \implies \boxed{`r round(sol[["ZEQ"]],4)`\Omega} 
+$$
+
+Tem-se do enunciado do problema para o primário uma tensão de `r round(sol$vBTLinha,2)`V de linha e `r round(sol$vATFase,2)`V de fase, além de uma tensão no secundário de `r round(sol$vBTLinha,2)`V de linha e  `r round(sol$vBTFase,2)`V de fase no estrela equivalente. Assim, será utilizado um fator de conversão de 
+
+$$
+a = \frac{`r round(sol[["vATFase"]],2)`}{`r round(sol[["vBTFase"]],2)`} \quad \boxed{a = `r round(sol[["a"]],2)`}
+$$
+
+Desse modo, tem-se a impedância equivalente
+
+$$
+\boxed{Z_{eq} = `r round(sol[["zeqPRI"]],2)` = `r round(Mod(sol[["zeqPRI"]]),2)` \angle (`r round(rad2degree(Arg(sol[["zeqPRI"]])),2)`)^\circ\Omega}
+$$
+
+Considerando que o transformador fornece uma corrente nominal, é possível fazer $S = \sqrt3VI$ ou $I_c = \frac{S}{\sqrt3V_s}$. Assim:
+
+$$
+I_{c} = \frac{`r dados[["CARGA"]]`}{\sqrt{3}(`r dados[["V1"]]`)(`r dados[["FP"]]`)} \implies \boxed{I_{c} = `r round(Mod(sol[["ic"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ic"]])),2)`)^\circ A}
+$$
+
+Com o valor da corrente de saída, e sabendo que $I_e = aI_c$, tem-se que a corrente de entrada é de
+
+$$
+\boxed{I_e = `r round(sol[["ie"]],2)` A =  `r round(Mod(sol[["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ie"]])),2)`)^\circ A}
+$$
+
+Com a corrente de entrada, tensão na fonte e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado primário) por meio das Tensões de Kirchhoff.
+
+$$
+V_c = V_e - (Z_T)(I_e) = `r round(sol[["ve"]],2)` -  (`r round(sol[["zeqPRI"]],2)`)(`r round(sol[["ie"]],2)`)
+$$
+
+Assim,
+
+$$
+V_c = `r round(sol[["vcr"]],2)` = `r round(Mod(sol[["vcr"]]),2)` \angle `r round(rad2degree(Arg(sol[["vcr"]])),2)` ^\circ V
+$$
+
+Com os valores de $V_e$ e $I_e$, é possível calcular $S_e$ por meio de $S_e = \sqrt{3} I_e V_e$. Assim, $S_e = `r round(sol[["se"]],2)`VA$. O fator de potência na fonte é de $fp_e = \cos(\theta_v-\theta_i) = `r round(sol[["fpe"]],2)`$
+
+A regulação é calculada como
+
+$$
+\Re = \frac{|V_e|-|V_s|}{|V_s|} = \frac{`r round(Mod(sol[["ve"]]),2)` - `r round(Mod(sol[["vcr"]]),2)`}{`r round(Mod(sol[["vcr"]]),2)`} = `r round(sol[["re"]],2)` \implies \Re = `r round(100*sol[["re"]],2)` \%
+$$
+
+o rendimento é definido por
+
+$$
+\eta = \frac{P_{s3\phi}}{P_{e3\phi}} = \frac{P_{s3\phi}}{P_{s3\phi} +P_{f3\phi}+P_{j3\phi}+P_{sup3\phi}}
+$$
+
+Assim,
+
+
+$$
+\eta = \frac{`r dados[["CARGA"]]`}{`r dados[["CARGA"]]` + `r dados[["P3PHI"]]` + `r sol[["pj3phi"]]` + 0} \implies \eta =`r round(100*sol[["n"]],2)` \%
+$$
+
