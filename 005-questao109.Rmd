@@ -48,7 +48,7 @@ $$
 \boxed{I_e = `r round(sol[["ie"]],2)` A =  `r round(Mod(sol[["ie"]]),2)` \angle (`r round(rad2degree(Arg(sol[["ie"]])),2)`)^\circ A}
 $$
 
-Com a corrente de entrada, tensão na fonte e impedâncias do circuito, é possível agora calcular a tensão na fonte (pelo lado primário) por meio das Tensões de Kirchhoff.
+Com a corrente de entrada, tensão na fonte e impedâncias do circuito, é possível agora calcular a tensão na carga por meio das Tensões de Kirchhoff.
 
 $$
 V_c = V_e - (Z_T)(I_e) = `r round(sol[["ve"]],2)` -  (`r round(sol[["zeqPRI"]],2)`)(`r round(sol[["ie"]],2)`)
