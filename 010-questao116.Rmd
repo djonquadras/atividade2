@@ -1,4 +1,5 @@
 <!-- Criado por Djonathan Quadras -->
+<!-- ESSE NAO SERÁ CRIADO AUTOMATICAMENTE -->
 
 # Questão 1.16 {-}
 
@@ -17,8 +18,8 @@ Um transformador de três enrolamentos foi ensaiado para a obtenção de suas im
 Após os ensaios em laboratório, os dados foram trabalhados e transformados em valores percentuais, como segue:
 
 - Ensaio 1: $Z_{ps}$ = `r 100*(dados$E1Z)`%, na base `r dados$E1V`V e `r dados$E1P`VA;
-- Ensaio 2: $Z_{ps}$ = `r 100*(dados$E2Z)`%, na base `r dados$E2V`V e `r dados$E2P`VA;
-- Ensaio 3: $Z_{ps}$ = `r 100*(dados$E3Z)`%, na base `r dados$E3V`V e `r dados$E3P`VA;
+- Ensaio 2: $Z_{pt}$ = `r 100*(dados$E2Z)`%, na base `r dados$E2V`V e `r dados$E2P`VA;
+- Ensaio 3: $Z_{st}$ = `r 100*(dados$E3Z)`%, na base `r dados$E3V`V e `r dados$E3P`VA;
 
 Pede-se:
 
@@ -27,4 +28,76 @@ b. Desenhar o circuito elétrico equivalente completo em Ohms ($\Omega$) com os 
 
 ## Resolução {-}
 
-Working on it :)
+Olhando os resultados dos ensaios há duas observações:
+
+1. Os valores das impedâncias (no caso, de reatânncias) estão expressos em porcentagem e não em **p.u.**. Isto é fácil de resolver, basta dividir os valores fornecidos por 100. Assim,
+
+- $Z_{ps}$ = 0.069, na base 29.70kV e 30MVA;
+- $Z_{pt}$ = 0.056, na base 29.70kV e 10.50 MVA;
+- $Z_{st}$ = 0.038, na base 132.0kV e 10.59MVA;
+
+2. Os valores de base são diferentes entre si. Para poder compará-los, ou realizar operações, eles devem estar na mesma base. No caso deste problema, a base fornecida é 30MVA com as tensões normais nos pontos considerados. Assim, basta aplicar sucessivamente a seguinte equação:
+
+$$
+Z_{pu_{base2}} = Z_{pu_{base1}}(\frac{V_{base1}}{V_{base2}})^2\frac{S_{base2}}{S_{base1}}
+$$
+
+Então:
+
+$$
+Z_{ps2} = 0.069(\frac{29.70}{29.70})^2\frac{30}{30} \implies Z_{ps2} = 0.069pu
+$$
+
+$$
+Z_{pt2} = 0.056(\frac{29.70}{29.70})^2\frac{30}{10.50} \implies Z_{pt2} = 0.160pu
+$$
+
+$$
+Z_{st2} = 0.038(\frac{132}{132})^2\frac{30}{10.50} \implies Z_{st2} = 0.109pu
+$$
+
+Para se desenhar o modelo que é considerado a melhor representação por fase faltam calcular as impedâncias (reatâncias) em cada fase (não entre as fases, como as fornecidas). Então:
+
+$$
+Z_p = \frac{1}{2}(Z_{ps2} + Z_{pt2} - Z_{st2}) = \frac{1}{2}(0.069 + 0.160 - 0.109) = 0.06 pu
+$$
+
+$$
+Z_s = \frac{1}{2}(Z_{ps2} + Z_{st2} - Z_{pt2}) = \frac{1}{2}(0.069 + 0.109 - 0.160) = 0.009 pu
+$$
+
+$$
+Z_t = \frac{1}{2}(Z_{pt2} + Z_{st2} - Z_{ps2}) = \frac{1}{2}(0.160 + 0.109 - 0.069) = 0.1 pu
+$$
+
+Agora, traçando o diagrama:
+
+```{r fig.align='center', echo=FALSE, fig.cap='diagrama', out.width='80%'}
+knitr::include_graphics('images/prob116/001.jpg', dpi = NA)
+```
+
+Para calcular o circuito elétrico equivalente completo em Ohms referido ao terciário basta multiplicar os valores em pu indicados no diagrama anterior pelo valor de base de impedância do terciário, calculado a partir dos valores 30MVA e 9,60kV. Por que estes valores? Oras, todos os valores das impedâncias (reatâncias) agora estão na mesma base (30MVA e tensões nominais) e, dependendo para o lado que se deseja os valores em ohms, deve-se multiplicar pelo valor de base daquele lado (no caso, o terciário). Assim:
+
+$$
+Z_{base} = \frac{V^2_{base}}{S_{base}}=\frac{(9.6\times 10^3)^2}{30\times 10^6} = 3.072\Omega
+$$
+
+Então: 
+
+$$
+Z_{P_{referido}} = Z_PZ_{base} = 0.060\times1.536 = 0.184320\Omega
+$$
+
+$$
+Z_{S_{referido}} = Z_SZ_{base} = 0.009\times 3.072 = 0.027648\Omega
+$$
+
+$$
+Z_{T_{referido}} = Z_PZ_{base} = 0.1 \times 3.072 - 0.3072\Omega
+$$
+
+Finalmente, o circuito elétrico equivalente passa a ser:
+
+```{r fig.align='center', echo=FALSE, fig.cap='circuito equivalente', out.width='80%'}
+knitr::include_graphics('images/prob116/002.jpg', dpi = NA)
+```
