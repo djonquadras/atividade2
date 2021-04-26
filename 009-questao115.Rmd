@@ -4,9 +4,10 @@
 
 
 ```{r, echo=FALSE, include=FALSE}
-source("scripts/equations.R", local = knitr::knit_global())
+source("scripts/solution115.R", local = knitr::knit_global())
 source("scripts/enunciados.R", local = knitr::knit_global())
 dados <- selecionaDados(questao115, params$modelo)
+sol <- solution(dados)
 ```
 
 Um transformador de potência monofásico, de `r dados$S`VA, `r dados$V1`/`r dados$V2` V, `r dados$f`Hz, deve ser usado como autotransformador para alimentar um circuito de `r dados$CIRC`V a partir de um gerador de `r dados$GER`V. Sob carga nominal e fator de potência `r dados$FP1` indutivo, o rendimento do transformador monofásico foi calculado como de `r 100*(dados$R)`%. Para o autotransformador, pede-se:
@@ -17,4 +18,80 @@ c. Seu rendimento a plena carga, com fatores de potência `r dados$FP1` indutivo
 
 ## Resolução {-}
 
-Working on it :)
+Em função das funções disponiveis e desejadas foi desenhado o diagrama abaixo.
+
+```{r fig.align='center', echo=FALSE, fig.cap='Enunciado', out.width='80%'}
+knitr::include_graphics('images/prob115/001.jpg', dpi = NA)
+```
+
+Inicialmente calcula-se as correntes nominais nos enrolamentos. Começando por $I_2$,
+
+$$
+I_2 = \frac{S_{nominal}}{V_{nominal_2}} = \frac{`r dados[["S"]]`}{`r dados[["V2"]]`} \implies \boxed{I_2 = `r sol[["i2"]]`A}
+$$
+
+Em seguida, calcula-se $I_3$,
+
+$$
+I_3 = \frac{S_{nominal}}{V_{nominal_1}} = \frac{`r dados[["S"]]`}{`r dados[["V1"]]`} \implies \boxed{I_3 = `r sol[["i3"]]`A}
+$$
+
+Por fim, calcula-se $I_1$,
+
+$$
+I_1 = I_2 -I_3 = `r sol[["i2"]]` - `r sol[["i3"]]` \implies \boxed{I_1 = `r sol[["i1"]]`A}
+$$
+
+Com estes valores é possível encontrar as potências. Iniciando pela potência transformada, tem-se
+
+$$
+S_{transformada} = I_2V_{nominal_2} = (`r sol[["i2"]]`)(`r dados[["V2"]]`) \implies \boxed{S_{transformada} = `r sol[["strans"]]`VA}
+$$
+
+Para a potência nominal, tem-se
+
+$$
+S_{nominal} = I_1V_{primário} = (`r sol[["i1"]]`)(`r dados[["V1"]]`) \implies \boxed{S_{nominal} = `r sol[["snominal"]]`VA}
+$$
+
+Por fim, para a potência passante tem-se
+
+$$
+S_{passante} = S_{nominal} - S_{transformada} = `r sol[["snominal"]]` - `r sol[["strans"]]` \implies \boxed{S_{passante} = `r sol[["spassante"]]`VA}
+$$
+
+Para calcular o rendimento a plena carga é feito
+
+$$
+\eta = \frac{P_{saída}}{P_{entrada}} = \frac{P_{saída}}{P_{saída} + \sum{Perdas}}
+$$
+
+Onde
+
+$$
+\sum{Perdas} = (\frac{1}{\eta}-1)(S_{saída})(\cos{\phi})
+$$
+
+Calcula-se inicialmente $\sum{Perdas}$ para cada um dos fatores de potência. Assim,
+
+$$
+\sum{Perdas}_{`r dados[["FP1"]]`} = (\frac{1}{`r dados[["R"]]`})(`r dados[["S"]]`)(`r dados[["FP1"]]`) = `r round(sol[["somaPerdas1"]],2)` W
+$$
+
+E
+
+$$
+\sum{Perdas}_{`r dados[["FP2"]]`} = (\frac{1}{`r dados[["R"]]`})(`r dados[["S"]]`)(`r dados[["FP2"]]`) = `r round(sol[["somaPerdas2"]],2)` W
+$$
+
+Por fim, pode-se calcular os rendimentos fazendo-se
+
+$$
+\eta_{`r dados[["FP1"]]`} = \frac{(`r dados[["S"]]`)(`r dados[["FP1"]]`)}{(`r dados[["S"]]`)(`r dados[["FP1"]]`) + `r round(sol[["somaPerdas1"]],2)`} \implies \boxed{\eta_{`r dados[["FP1"]]`} = `r round(100*sol[["n1"]],2)`\%}
+$$
+
+e
+
+$$
+\eta_{`r dados[["FP2"]]`} = \frac{(`r dados[["S"]]`)(`r dados[["FP2"]]`)}{(`r dados[["S"]]`)(`r dados[["FP2"]]`) + `r round(sol[["somaPerdas2"]],2)`} \implies \boxed{\eta_{`r dados[["FP2"]]`} = `r round(100*sol[["n2"]],2)`\%}
+$$
