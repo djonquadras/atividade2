@@ -14,9 +14,6 @@ calculaAngulo <- function(fp, adiantado){
   return(phi)
 }
 
-V1 = list(S = 110000, V1 = 4400, V2 = 440, f =60,
-          R1 = 2.5, X1 = 3.7417, GM = (0.061983/1000), BM = (0.45030/1000),
-          R2 = 0.025, X2 = 0.037417, fp= 0.6, adiantado = TRUE)
 
 solution <- function(dados){
   

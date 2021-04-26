@@ -14,8 +14,6 @@ calculaAngulo <- function(fp, adiantado){
   return(phi)
 }
 
-V1 = list(S = 220000, V1 = 4400, V2 = 440, f = 60,
-          CIRC = 440, GER = 4840, FP1 = 0.6, FP2 = 0.8, ADIANTADO = FALSE, R = 0.965)
 
 solution <- function(dados){
   i2 <- dados$S/dados$V2
